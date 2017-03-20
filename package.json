@@ -1,33 +1,21 @@
 {
-  "name": "apollo-starter-kit",
+  "name": "mytodo-server",
   "version": "0.1.0",
-  "description": "Minimal set of code to write a GraphQL server with Apollo graphql-tools",
   "scripts": {
     "start": "nodemon ./server.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/apollostack/apollo-starter-kit.git"
-  },
-  "keywords": [
-    "Node.js",
-    "Javascript",
-    "GraphQL",
-    "Express",
-    "Apollo",
-    "Meteor"
-  ],
-  "author": "Jonas Helfer <jonas@helfer.email>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/apollostack/apollo-starter-kit/issues"
-  },
-  "homepage": "https://github.com/apollostack/apollo-starter-kit#readme",
   "dependencies": {
+    "apollo-server": "^0.3.3",
+    "body-parser": "^1.17.1",
+    "casual": "^1.5.11",
+    "cors": "^2.8.1",
     "express": "4.13.4",
-    "apollo-server": "^0.1.2"
+    "graphql-tools": "^0.10.1",
+    "lodash": "^4.17.4",
+    "sequelize": "^3.30.2",
+    "sqlite": "^2.3.0"
   },
   "devDependencies": {
     "babel-cli": "6.5.1",

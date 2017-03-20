@@ -3,7 +3,7 @@ import Schema from './data/schema';
 import Resolvers from './data/resolvers';
 import cors from 'cors';
 
-import {apolloExpress, graphiqlExpress} from 'apollo-server';
+import {graphqlExpress, graphiqlExpress} from 'graphql-server-express';
 import {makeExecutableSchema} from 'graphql-tools';
 import bodyParser from 'body-parser';
 
@@ -29,7 +29,7 @@ const executableSchema = makeExecutableSchema({
 });
 
 // `context` must be an object and can't be undefined when using connectors
-graphQLServer.use('/graphql', bodyParser.json(), apolloExpress({
+graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({
     schema: executableSchema,
     context: {},
 }));

@@ -15,10 +15,15 @@ const TodoModel = db.define('todo', {
     isCompleted: {type: Sequelize.BOOLEAN},
 });
 
+db.sync({
+    logging : console.log
+});
+
+/*
 casual.seed(123);
 db.sync({force: true}).then(() => {
     _.times(10, () => {
-        let tem = new Date();
+        let tem = new Date("2017/03/10 12:00:00");
         return TodoModel.create({
             todoDate: tem.toLocaleString(),
             finishDate: "null",
@@ -27,7 +32,7 @@ db.sync({force: true}).then(() => {
         });
     });
 });
-
+*/
 const Todo = db.models.todo;
 
 export {Todo};

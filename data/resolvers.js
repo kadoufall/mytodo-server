@@ -1,10 +1,13 @@
-import {Todo} from './connectors';
-
+import {Todo,db} from './connectors';
 
 const resolvers = {
     Query: {
         todo(root, args){
-            return Todo.find({id: args.id});
+            return Todo.findOne({
+                where:{
+                    id : args.id
+                }
+            });
         },
         todos(){
             return Todo.findAll();
@@ -12,13 +15,37 @@ const resolvers = {
     },
     Mutation: {
         changeCompleted(_, {isCompleted, todoId}) {
-            let insertDate = new Date();
-            Todo.update({
-                    isCompleted: isCompleted,
-                    finishDate:insertDate.toLocaleString()
-                }, {where: {id: todoId}}
-            );
-            return Todo.find({id: todoId});
+            const results = Todo.findOne({
+                attributes: [[db.fn('MAX', db.col('id')), 'max_id']],
+                where:{
+                    isCompleted : false
+                }
+
+            }).then(function (result) {
+                let max_id = result.get("max_id");
+                //console.log("here "+todoId+"--"+max_id);
+                if(todoId != max_id){
+                    return Todo.findOne({
+                        where:{
+                            id : todoId
+                        }
+                    });
+                }else{
+                    let insertDate = new Date();
+                    Todo.update({
+                            isCompleted: isCompleted,
+                            finishDate:insertDate.toLocaleString()
+                        }, {where: {id: todoId}}
+                    );
+                    return Todo.findOne({
+                        where:{
+                            id : todoId
+                        }
+                    });
+                }
+            });
+
+            return results;
         },
         changeCompletedAll(_, {isCompleted}){
             Todo.update({
@@ -39,7 +66,11 @@ const resolvers = {
                 }, {where: {id: todoId}}
             );
 
-            return Todo.find({id: todoId});
+            return Todo.findOne({
+                where:{
+                    id : todoId
+                }
+            });
         },
         insertTodo(_, {newTest}){
             let insertDate = new Date();
@@ -61,5 +92,4 @@ const resolvers = {
 
 };
 
-
-export default resolvers;
+export default resolvers

@@ -35,4 +35,4 @@ db.sync({force: true}).then(() => {
 */
 const Todo = db.models.todo;
 
-export {Todo};
+export {Todo,db};

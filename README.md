@@ -4,9 +4,9 @@
 - 使用[graphql-tools](https://github.com/apollographql/graphql-tools)构建GraphQL模式和解析器
 - 数据库使用[sqlite](https://www.sqlite.org/)
 ## Initial
-1. git clone https://github.com/kadoufall/todo-server.git todo-server
+1. git clone https://github.com/kadoufall/mytodo-server.git mytodo-server
 
-2. cd todo-server
+2. cd mytodo-server
 
 3. npm install
 
